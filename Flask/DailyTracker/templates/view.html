@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!--       navbar container -->
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+
+        <!--        nav-bar main heading-->
+        <a class="navbar-brand mr-4" href="{{ url_for('login') }}">Daily Log</a>
+
+        <!--        hamburger button navbar-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--        collapsing nav bar-->
+        <div class="collapse navbar-collapse" id="navbarToggle">
+
+            <!--         login and register links-->
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<!--log form-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div data-role="dynamic-fields">
+                <div class="form-inline">
+
+                    <div class="form1">
+
+                        <div class="btn-group dropdown" >
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Bundle
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="">{{ form.project[0]}}</a>
+                                <a class="dropdown-item" href="">{{ form.project[1]}}</a>
+                            </div>
+                        </div>
+
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Project
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="">{{ form.project[0]}}</a>
+                                <a class="dropdown-item" href="">{{ form.project[1]}}</a>
+                            </div>
+                        </div>
+
+                        <div class="btn-group dropdown">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Person
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="">{{ form.person[0]}}</a>
+                                <a class="dropdown-item" href="">{{ form.person[1]}}</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" id="submit">View Logs</button>
+                    <style>
+                        #submit {
+                            position: relative;
+                            left: 5rem;
+                            background-color: #5f788a;
+                        }
+                    </style>
+
+
+                </div>  <!-- /div.form-inline -->
+            </div>  <!-- /div[data-role="dynamic-fields"] -->
+        </div>  <!-- /div.col-md-12 -->
+    </div>  <!-- /div.row -->
+
+    <div style="text-align: end; padding-bottom: 20px">
+        <h4 style="padding-top: 20px;">Profile:</h4>
+        <h5>First Last Name </h5>
+        <h6>Registration Id:</h6>
+        <h6>email@id.com</h6>
+    </div>
+
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Duration(hrs)</th>
+            <th scope="col">Log</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>04/07/2019</td>
+            <td>2</td>
+            <td>this is my first log</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>05/07/2019</td>
+            <td>2.5</td>
+            <td>this is my second log</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>06/07/2019</td>
+            <td>1</td>
+            <td>this is my third log</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content%}
