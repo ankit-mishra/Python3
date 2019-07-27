@@ -1,0 +1,51 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+}
+
+/*navbar color*/
+.bg-steel {
+    background-color: #5f788a;
+}
+
+
+#b_field, #p_field, #i_field {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+
+}
+
+#bundle_text, #project_text, #ID_text {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.form-control:focus {
+
+    box-shadow: 0 0 0 0.2rem rgba(130,138,145,.5);
+
+}
+
+#daily_log {
+    height: 10rem;
+    width: 30rem;
+}
+
+
+#log_submit {
+ position: relative;
+ top: 5%;
+ left: 80%;
+}
+

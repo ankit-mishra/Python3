@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!--       navbar container -->
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+
+        <!--        nav-bar main heading-->
+        <a class="navbar-brand mr-4" href="{{ url_for('login') }}">Daily Log</a>
+
+        <!--        hamburger button navbar-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--        collapsing nav bar-->
+        <div class="collapse navbar-collapse" id="navbarToggle">
+
+            <!--         login and register links-->
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="{{ url_for('view') }}">View Logs</a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<!--log form-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <form action="" method="post">
+
+                <h3>Enter the following Details</h3>
+                <br>
+                <br>
+                <div class="form-inline">
+
+                        <label for="bundle_text">Bundle:</label>
+                        {{form.bundle_text(list="bundle_data_lst")}}
+                        <datalist id="bundle_data_lst">
+                            {% for entry in bundle_lst %}
+                            <option value={{ entry }} >
+                                {% endfor %}
+                        </datalist>
+
+                        <label for="project_text">Project:</label>
+                        {{form.project_text(list="project_data_lst")}}
+                        <datalist id="project_data_lst">
+                            {% for entry in project_lst %}
+                            <option value={{ entry }}>
+                                {% endfor %}
+                        </datalist>
+
+                        <label for="ID_text">ID:</label>
+                        {{form.ID_text(list="ID_data_lst")}}
+                        <datalist id="ID_data_lst">
+                            {% for entry in ID_lst %}
+                            <option value={{ entry }}>
+                                {% endfor %}
+                        </datalist>
+
+                </div>
+
+                <div class="form-group">
+                    {{form.submit(class = "btn btn-secondary", id = "log_submit") }}
+                </div>
+
+            </form>
+
+
+
+        </div>  <!-- /div.col-md-12 -->
+    </div>  <!-- /div.row -->
+
+</div>
+
+
+
+
+{% endblock content%}

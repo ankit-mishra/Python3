@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!--       navbar container -->
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+
+        <!--        nav-bar main heading-->
+        <a class="navbar-brand mr-4" href="{{ url_for('login') }}">Daily Log</a>
+
+        <!--        hamburger button navbar-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--        collapsing nav bar-->
+        <div class="collapse navbar-collapse" id="navbarToggle">
+
+            <!--         login and register links-->
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="{{ url_for('add_projects') }}">Add Projects</a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<!--log form-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+
+
+                <div class="form-inline">
+
+                    <fieldset>
+
+                        <div data-role="dynamic-fields">
+
+
+                                <div class="drop_downs">
+
+                                    {{form.b_field(class = "form-control") }}
+
+                                    {{form.p_field(class = "form-control") }}
+
+                                    {{form.i_field(class = "form-control") }}
+                                </div>
+
+
+
+                        </div>  <!-- /div[data-role="dynamic-fields"] -->
+
+                    </fieldset>
+
+                    <div class="form-group">
+                        {{form.submit(class = "btn btn-secondary", id = "log_submit") }}
+                    </div>
+
+                 </div>  <!-- /div.form-inline -->
+
+            </form>
+
+        </div>  <!-- /div.col-md-12 -->
+    </div>  <!-- /div.row -->
+
+
+
+
+    {% if user %}
+    <div style="text-align: end; padding-bottom: 20px">
+        <h4 style="padding-top: 20px;">Details</h4>
+        <h5>Name: {{user.name}}</h5>
+        <h6>Registration ID: {{user.ID}}</h6>
+        <h6>Email: {{user.email}}</h6>
+    </div>
+
+    {% endif %}
+
+
+    {% if log_list %}
+
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Duration(hrs)</th>
+            <th scope="col">Log</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for log in log_list:%}
+        <tr>
+            <th scope="row">{{log['log_num']}}</th>
+            <td>{{log['log_date']}}</td>
+            <td>{{log['log_time']}}</td>
+            <td>{{log['log_text']}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% elif no_log %}
+
+    <br>
+    <h3>{{no_log}}</h3>
+
+    {%else %}
+
+    <br>
+    <h3>Select and enter submit to view daily logs</h3>
+
+    {% endif %}
+
+
+
+
+
+</div>
+
+
+<script>
+    let b_slct = document.getElementById('b_field');
+    let p_slct = document.getElementById('p_field');
+    let i_slct = document.getElementById('i_field');
+
+    b_slct.onchange = function () {
+        bundle_name = b_slct.value;
+        fetch('/project/' + bundle_name).then(function (response) {
+            response.json().then(function (data) {
+                let ohtml = '';
+                for (let pr of data.projects){
+                    ohtml += '<option value="' + pr.name + '">' + pr.name + '</option>';
+
+                }
+                p_slct.innerHTML = ohtml;
+            });
+        });
+    }
+
+    p_slct.onchange = function () {
+        bundle_name = b_slct.value;
+        project_name = p_slct.value;
+        fetch('/id/' + bundle_name +'/'+ project_name).then(function (response) {
+            response.json().then(function (data) {
+                console.table(data);
+                let ohtml = '';
+                for (let i of data.IDs){
+                    ohtml += '<option value="' + i.name + '">' + i.name + '</option>';
+
+                }
+                i_slct.innerHTML = ohtml;
+            });
+        });
+    }
+
+</script>
+
+
+{% endblock content%}

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!--       navbar container -->
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+       <div class="container">
+
+<!--        nav-bar main heading-->
+        <a class="navbar-brand mr-4" href="{{ url_for('login') }}">Daily Log</a>
+
+<!--        hamburger button navbar-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+        </button>
+
+<!--        collapsing nav bar-->
+        <div class="collapse navbar-collapse" id="navbarToggle">
+
+<!--         login and register links-->
+         <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+          <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+         </div>
+
+        </div>
+       </div>
+      </nav>
+
+<!--login form-->
+ <div class="container">
+
+  <div class="row">
+   <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="card card-signin my-5">
+     <div class="card-body">
+
+      <h5 class="card-title text-center">Log In</h5>
+
+       <!--signin form-->
+
+         <form class="form-signin" method = "post" action = "">
+             {{ form.hidden_tag() }}
+
+          <fieldset>
+
+              <div class="form-label-group">
+                  <!--                                <input type="text" id="inputRegid" class="form-control" placeholder="Registration I.D." required>-->
+                  {% if form.ID.errors %}
+                  {{ form.ID(class = "form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.ID.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.ID(class = "form-control") }}
+                  {% endif %}
+                  <label for="inputRegid">Registration I.D.</label>
+              </div>
+
+              <div class="form-label-group">
+                  <!--                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+                  {% if form.password.errors %}
+                  {{ form.password(class = "form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.password.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.password(class = "form-control") }}
+                  {% endif %}
+                  <label for="inputPassword">Password</label>
+              </div>
+
+
+          </fieldset>
+
+          <div class="form-group">
+              {{form.submit(class = "btn btn-lg btn-primary btn-block text-uppercase") }}
+<!--              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>-->
+          </div>
+
+
+      </form>
+
+
+     </div>
+    </div>
+   </div>
+  </div>
+     
+     <div class="border-top pt-3">
+         <small class="text-muted">
+             Need an Account? <a href="{{ url_for('register') }}">Register</a>
+         </small>
+     </div>
+     
+ </div>
+{% endblock content%}
